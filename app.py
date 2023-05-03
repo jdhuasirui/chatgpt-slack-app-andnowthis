@@ -84,5 +84,4 @@ def brainstorm_handler(ack, body, say):
     
 # Start your app
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 3000))
-    app.start(port=port)
+    SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"]).start()
