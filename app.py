@@ -10,7 +10,10 @@ import re
 #load_dotenv()
 
 # Initializes your app with your bot token and socket mode handler
-app = App(token=os.environ.get("SLACK_BOT_TOKEN"))
+app = App(
+    token=os.environ.get("SLACK_BOT_TOKEN"),
+    signing_secret=os.environ.get("SLACK_SIGNING_SECRET")
+)
 
 #Langchain implementation
 
@@ -81,4 +84,5 @@ def brainstorm_handler(ack, body, say):
     
 # Start your app
 if __name__ == "__main__":
-    SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"]).start()
+    port = int(os.environ.get("PORT", 3000))
+    app.start(port=port)
